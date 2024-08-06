@@ -6,14 +6,18 @@ private JoyPad control;
 private int direccion;
 
 public void setup(){
-  size(1000,600);
-  frameRate(5);
+  size(900,600);
+  frameRate(8);
   control= new JoyPad();
-  personaje= new Personaje(new PVector (width/2, height/2));
+  PImage mapaColision = loadImage("mapaColision.png"); // Cargar la imagen de colisión
+  Collider.iniciarColision(this,mapaColision); // Inicializar CollisionManager
+  personaje= new Personaje(new PVector (width-40, height/2));
+  fondo= new Escenario();
 }
 
 public void draw(){
-  background(0);
+  background(255);
+  fondo.display();
   if(control.isUpPressed()){
     this.direccion=1;
   } else if(control.isDownPressed()){

@@ -23,15 +23,16 @@ class Personaje extends GameObject{
   
   public void display(){
     imageMode(CENTER);
-    image(descanso.get(framesX,0,32,32), posicion.x,posicion.y, 70,70);
+    image(descanso.get(framesX,0,32,32), posicion.x,posicion.y, 40,40);
     framesX += 32;
     if(framesX >= descanso.width){
       framesX= 0;
     }
+    //segun la direccion muestra una animacion para cuando camina
     switch(direccion){
       case 1:{
         imageMode(CENTER);
-        image(caminaE.get(framesX,0,32,32), posicion.x,posicion.y, 70,70);
+        image(caminaE.get(framesX,0,32,32), posicion.x,posicion.y, 40,40);
         framesX += 32;
         if(framesX >= caminaE.width){
           framesX= 0;
@@ -40,7 +41,7 @@ class Personaje extends GameObject{
       }
       case 2:{
         imageMode(CENTER);
-        image(camina.get(framesX,0,32,32), posicion.x,posicion.y, 70,70);
+        image(camina.get(framesX,0,32,32), posicion.x,posicion.y, 40,40);
         framesX += 32;
         if(framesX >= camina.width){
           framesX= 0;
@@ -49,7 +50,7 @@ class Personaje extends GameObject{
       }
       case 3:{
         imageMode(CENTER);
-        image(caminaI.get(framesX,0,32,32), posicion.x,posicion.y, 70,70);
+        image(caminaI.get(framesX,0,32,32), posicion.x,posicion.y, 40,40);
         framesX += 32;
         if(framesX >= caminaI.width){
           framesX= 0;
@@ -58,7 +59,7 @@ class Personaje extends GameObject{
       }
       case 4:{
         imageMode(CENTER);
-        image(caminaD.get(framesX,0,32,32), posicion.x,posicion.y, 70,70);
+        image(caminaD.get(framesX,0,32,32), posicion.x,posicion.y, 40,40);
         framesX += 32;
         if(framesX >= caminaD.width){
           framesX= 0;
@@ -67,26 +68,36 @@ class Personaje extends GameObject{
       }
     }
   }
-  public void mover(){
-    switch(direccion){
-      case 1:{
-        this.posicion.y -= (velocidad*Time.getDeltaTime(frameRate));
+   public void mover() {
+    PVector nuevaPosicion = new PVector(posicion.x, posicion.y); //actualiza la posicion segun la colision
+    switch (direccion) {
+      case 1: {
+        nuevaPosicion.y -= (velocidad * Time.getDeltaTime(frameRate));
         break;
       }
-      case 2:{
-        this.posicion.y += (velocidad*Time.getDeltaTime(frameRate));
+      case 2: {
+        nuevaPosicion.y += (velocidad * Time.getDeltaTime(frameRate));
         break;
       }
-      case 3:{
-        this.posicion.x -= (velocidad*Time.getDeltaTime(frameRate));
+      case 3: {
+        nuevaPosicion.x -= (velocidad * Time.getDeltaTime(frameRate));
         break;
       }
-      case 4:{
-        this.posicion.x += (velocidad*Time.getDeltaTime(frameRate));
+      case 4: {
+        nuevaPosicion.x += (velocidad * Time.getDeltaTime(frameRate));
         break;
       }
     }
+    
+    // Verificar colisiones usando la clase Collider
+    if (Collider.esTransitable(nuevaPosicion)) {
+      this.posicion = nuevaPosicion;
+    } else {
+      // Verificacion de colision
+      println("Collision detected at position:", nuevaPosicion);
+    }
   }
+  
   public void setDireccion(int direccion) {
     this.direccion = direccion;
   }
