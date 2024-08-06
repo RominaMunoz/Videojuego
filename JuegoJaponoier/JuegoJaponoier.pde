@@ -35,6 +35,14 @@ public void draw(){
   personaje.setDireccion(this.direccion);
   personaje.display();
   personaje.mover();
+  
+  if (Collider.colisiona1(personaje, enemigo)) {
+    println("¡Colisión detectada!");
+  }
+  
+  if (Collider.colisiona2(personaje, Collider.centro, Collider.radio)) {
+    println("¡Colisión detectada!");
+  }
 }
 
 public void keyPressed(){

@@ -13,15 +13,15 @@ class MikoshiNyudo{
   
   public void display(){
     imageMode(CENTER);
-    image(yokai1.get(int(frames.x),int(frames.y),50,60), posicion.x,posicion.y, 40,40);
+    image(yokai1.get(int(frames.x),int(frames.y),50,60), posicion.x,posicion.y, 50,50);
     frames.x += 50;
     if(frames.x >= yokai1.width){
-        frames.x = 0;
-        frames.y += 60;
-        if(frames.y >= yokai1.height){
-          frames.y = 0;
-        }
+      frames.x = 0;
+      frames.y += 60;
+      if(frames.y >= yokai1.height){
+        frames.y = 0;
       }
+    }
   }
   
   public void mover(){
@@ -30,5 +30,9 @@ class MikoshiNyudo{
     if (posicion.y >= 330 || posicion.y <= 130) {
       velocidad = -velocidad;
     }
+  }
+  
+  public PVector getPosicion5() {
+    return posicion;
   }
 }

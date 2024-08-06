@@ -1,6 +1,8 @@
 static class Collider{
   private static PImage mapaColision;
   private static PApplet applet;
+  private static PVector centro = new PVector(30, 137);
+  private static int radio = 33;
 
   public static void iniciarColision(PApplet applet,PImage mapaColision) {
     Collider.mapaColision = mapaColision;
@@ -24,5 +26,23 @@ static class Collider{
     applet.println("Pixel color:", pixelColor, "Wall color:", wallColor);
     
     return pixelColor != wallColor;
+  }
+  
+  // Verifica si el personaje colisiona con los enemigos
+  public static boolean colisiona1(Personaje personaje, Enemigo enemigo) {
+    PVector[] posicionesEnemigos = enemigo.getPosiciones();
+    for (PVector posicionEnemigo : posicionesEnemigos) {
+      float distancia = PVector.dist(personaje.posicion, posicionEnemigo);
+      if (distancia < 25) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  // Verifica si el personaje colisiona con la casita
+  public static boolean colisiona2(Personaje personaje, PVector centro, float radio) {
+    float distancia = PVector.dist(personaje.posicion, centro);
+    return distancia <= radio;
   }
 }

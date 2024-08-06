@@ -30,7 +30,7 @@ class Tsukumogami{
   
   public void display(){
     imageMode(CENTER);
-    image(yokai3.get(int(frames1.x),int(frames1.y),110,100), posicion1.x,posicion1.y, 40,40);
+    image(yokai3.get(int(frames1.x),int(frames1.y),110,100), posicion1.x,posicion1.y, 50,50);
     frames1.x += 100;
     if(frames1.x >= yokai3.width){
       frames1.x = 0;
@@ -73,5 +73,17 @@ class Tsukumogami{
     if (posicion3.x >= 420 || posicion3.x <= 97) {
       velocidad3 = -velocidad3;
     }
+  }
+  
+  public PVector getPosicion1() {
+    return posicion1;
+  }
+
+  public PVector getPosicion2() {
+    return posicion2;
+  }
+
+  public PVector getPosicion3() {
+    return posicion3;
   }
 }
