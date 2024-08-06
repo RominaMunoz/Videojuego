@@ -8,6 +8,7 @@ private int direccion;
 public void setup(){
   size(900,600);
   frameRate(8);
+  enemigo= new Enemigo();
   control= new JoyPad();
   PImage mapaColision = loadImage("mapaColision.png"); // Cargar la imagen de colisión
   Collider.iniciarColision(this,mapaColision); // Inicializar CollisionManager
@@ -18,6 +19,8 @@ public void setup(){
 public void draw(){
   background(255);
   fondo.display();
+  enemigo.display();
+  enemigo.mover();
   if(control.isUpPressed()){
     this.direccion=1;
   } else if(control.isDownPressed()){

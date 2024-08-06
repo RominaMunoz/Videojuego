@@ -17,7 +17,7 @@ class Personaje extends GameObject{
     caminaD= requestImage("CaminaD.png");
     caminaE= requestImage("CaminaE.png");
     direccion=0;
-    velocidad= 50;
+    velocidad= 70;
     framesX= 0;
   }
   
